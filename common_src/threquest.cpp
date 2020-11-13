@@ -48,10 +48,10 @@ void ThRequest::process_get_method(std::stringstream& petition,
                                 const std::string& resource_name,
                                 std::string& protocol){
     std::string body = resources.get_body(resource_name);
-    if (body.length() == 0){
-        response << "HTTP/1.1 404 NOT FOUND\n\n";
-        return; 
-    }
+    // if (body.length() == 0){
+    //     response << "HTTP/1.1 404 NOT FOUND\n\n";
+    //     return; 
+    // }
 
     
     if (resource_name == "/"){
@@ -68,7 +68,7 @@ void ThRequest::process_post_method(std::stringstream& petition,
                                 const std::string& method,
                                 const std::string& resource_name,
                                 const std::string& protocol){
-    if (method == "/"){
+    if (resource_name == "/"){
         response << "HTTP/1.1 403 FORBIDDEN\n\n";
         return;
     }
@@ -86,8 +86,7 @@ void ThRequest::process_post_method(std::stringstream& petition,
 
     parse_body(petition, r);
     resources.post_resource(r);
-
-    response << "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
+    response << "HTTP/1.1 200 OK\n\n" << r.get_body();
 }
 
 void ThRequest::parse_first_petition_line(std::stringstream& petition,
@@ -99,7 +98,12 @@ void ThRequest::parse_first_petition_line(std::stringstream& petition,
     std::istringstream firstLineStream(firstLine);
 
     firstLineStream >> method >> resource_name >> protocol;
-    std::cout << method + " " + resource_name + " " + protocol << std::endl;
+    std::cout << method;
+    if (resource_name.length() > 0)
+        std::cout << " " + resource_name;  
+    if (protocol.length() > 0)
+        std::cout << " " + protocol;
+    std::cout << std::endl;
 }
 
 void ThRequest::parse_header(std::stringstream& petition, Resource& r){

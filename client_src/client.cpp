@@ -26,7 +26,7 @@ void Client::get_server_response(){
         s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
         response << socket_buffer;
     }
-	std::cout << response.str() << std::endl;
+	std::cout << response.str();
 }
 
 void Client::shutdown_writing(){

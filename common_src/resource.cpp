@@ -25,7 +25,12 @@ void Resource::set_content_length(const std::string& v){
     content_length = v;
 }
 void Resource::set_body(std::stringstream& b){
-    body = b.str();
+    std::string line;
+    while (getline(b, line)){
+        if(line.length() > 0)
+            body += line + "\n";
+        // std::cout << "linea dentro de resource:" << line << std::endl;
+    }
 }
 
 std::string Resource::get_resource_path(){
