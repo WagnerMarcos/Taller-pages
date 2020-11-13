@@ -38,7 +38,8 @@ void ThRequest::process_petition(std::stringstream& petition,
         process_post_method(petition, response, method, path, protocol);
 
     else 
-        response << "HTTP/1.1 405 NOT ALLOWED\n\n" << method << " es un comando desconocido\n";
+        response << "HTTP/1.1 405 METHOD NOT ALLOWED\n\n" << method 
+                << " es un comando desconocido\n";
 }
 
 void ThRequest::process_get_method(std::stringstream& petition,
@@ -86,7 +87,7 @@ void ThRequest::process_post_method(std::stringstream& petition,
     parse_body(petition, r);
     resources.post_resource(r);
 
-    response << "HTTP/1.1 200 OK\n\n" << r.get_body();
+    response << "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
 }
 
 void ThRequest::parse_first_petition_line(std::stringstream& petition,
