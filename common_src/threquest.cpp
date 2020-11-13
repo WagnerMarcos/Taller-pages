@@ -37,8 +37,8 @@ void ThRequest::process_petition(std::stringstream& petition,
     else if (method == "POST")
         process_post_method(petition, response, method, path, protocol);
 
-    else
-        response << "HTTP/1.1 403 FORBIDDEN\n\n";
+    else 
+        response << "HTTP/1.1 405 NOT ALLOWED\n\n" << method << " es un comando desconocido\n";
 }
 
 void ThRequest::process_get_method(std::stringstream& petition,
@@ -54,10 +54,10 @@ void ThRequest::process_get_method(std::stringstream& petition,
 
     
     if (resource_name == "/"){
-        response << "​HTTP 200 OK\nContent-Type: text/html\n\n";
+        response << "​HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
         response << body;
     } else {
-        response << "​HTTP 200 OK\n\n";
+        response << "​HTTP/1.1 200 OK\n\n";
         response << body;
     }
 }

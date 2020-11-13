@@ -28,7 +28,7 @@ public:
             // Al leer q cierra socket aceptador.
     void readRootFile(std::string fileName);
 
-    void run(const char *service, const std::string fileName);
+    void run(const char *service, const std::string& fileName);
 };
 
 #endif

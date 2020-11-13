@@ -19,7 +19,6 @@ void ThAcceptor::stop_accepting(){
     acceptor_socket.shutdown_read();
     acceptor_socket.shutdown_writing();
     acceptor_socket.close();
-    std::cout << "djejo de aceptar" << std::endl;
 }
 
 void ThAcceptor::bind_and_listen(const char *service){
@@ -28,19 +27,11 @@ void ThAcceptor::bind_and_listen(const char *service){
 
 void ThAcceptor::run(){
     while (keep_accepting){
-        std::cout << "Espero coneccion:" << std::endl;
         Socket clSocket(accept());
-        std::cout << "Acepte uno" << std::endl;
         ThRequest *t = new ThRequest(resources, std::move(clSocket));
         t -> start();
-        
-        std::cout << "Empece:" << std::endl;
         threads.push_back(t);
-
-        std::cout << "Agregue:" << std::endl;
-
         delete_finish_clients(threads);
-        std::cout << "Borre:" << std::endl;
     }
 
     for (size_t i = 0; i < threads.size(); i++){

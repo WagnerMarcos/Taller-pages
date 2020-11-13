@@ -11,7 +11,7 @@ void Server::readRootFile(std::string fileName){
     resources.post_resource(r);
 }
 
-void Server::run(const char *service, const std::string fileName){
+void Server::run(const char *service, const std::string& fileName){
     std::string input;
     bool keep_accepting = true;
     ThAcceptor acceptor(service, resources);

@@ -1,7 +1,6 @@
 #include "client.h"
 
 void Client::send_petition(){
-    // Send through sockets read bytes.
 	s.send(petition.str().data(), petition.str().length());
 }
 
@@ -22,7 +21,6 @@ void Client::get_server_response(){
     size_t buffer_size = 1024;
     size_t bytes_received = 0;
     bool socket_open = true;
-    std::cout << "Espero respuesta, response: " << response.str() << std::endl;
 
     while (socket_open){
         s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
