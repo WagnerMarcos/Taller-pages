@@ -4,7 +4,7 @@ Socket::Socket(){
     fd = -1;
 }
 Socket::~Socket(){
-    if(fd != -1)
+    if (fd != -1)
         close();
     fd = -1;
 }
@@ -27,7 +27,6 @@ void Socket::close(){
 int Socket::bind_and_listen(const char *service){
     struct addrinfo hints, *results, *rp;
     int status = 0;
-    int s = 0;
     hints.ai_family = AF_INET;    
     hints.ai_socktype = SOCK_STREAM; 
     hints.ai_protocol = 0;
@@ -40,7 +39,7 @@ int Socket::bind_and_listen(const char *service){
     }
     for (rp = results; rp != NULL; rp = rp->ai_next){
         fd = ::socket(AF_INET, SOCK_STREAM, 0);
-        s = setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
+        int s = setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
         if (s == -1) {
             close();
             return 1;

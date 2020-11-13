@@ -4,6 +4,7 @@
 #include "lock.h"
 #include "resource.h"
 #include <map>
+#include <string>
 class ProtectedResources{
 private:
     std::map<std::string, Resource> resources;      

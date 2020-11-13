@@ -8,17 +8,18 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <utility>
 class ThRequest : public Thread{
 private:
     ProtectedResources& resources;
     Socket s;
     bool is_running = true;
+    
 public:
     ThRequest(ProtectedResources& resources, Socket socket);
     ~ThRequest();
     void operator()();
     virtual void run() override;
-
 
             // Recibe una peticion por un recurso
             // busca en el recursos map
@@ -28,7 +29,6 @@ public:
     bool is_dead();
     void process_petition(std::stringstream& buf, std::stringstream& response);
     void print_resources();
-    void set_response(std::stringstream& response, Resource& r);
     void send_response(std::stringstream& buf);
     void parse_method(std::stringstream& petition, Resource& r);
     void parse_header(std::stringstream& petition, Resource& r);
@@ -42,14 +42,13 @@ public:
 	void process_get_method(std::stringstream& petition,
 									std::stringstream& response,
                                     std::string& method,
-                                    std::string& resource_name,
+                                    const std::string& resource_name,
                                     std::string& protocol);
 	void process_post_method(std::stringstream& petition,
 									std::stringstream& response,
-                                    std::string& method,
-                                    std::string& resource_name,
-                                    std::string& protocol);
-
+                                    const std::string& method,
+                                    const std::string& resource_name,
+                                    const std::string& protocol);
 };
 
 #endif

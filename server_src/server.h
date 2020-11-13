@@ -15,21 +15,20 @@
 #include "../common_src/protectedResources.h"
 class Server{
 private:
-// Metodos conocidos por el servidor
-std::string allowedMethods[2] = {"GET",
-                                    "POST"};
-ProtectedResources resources;
-// std::atomic<bool> keep_accepting = true;
-            // Guardo los recursos agregados con POST
-            // Comienza con el archivo guardado con /
-            // Clave nombre de recurso. Valor es el 
-            // buffer con lo que se devuelve al cliente
+    // Metodos conocidos por el servidor
+    // std::string allowedMethods[2] = {"GET",
+    //                                     "POST"};
+    ProtectedResources resources;
+                // Guardo los recursos agregados con POST
+                // Comienza con el archivo guardado con /
+                // Clave nombre de recurso. Valor es el 
+                // buffer con lo que se devuelve al cliente
 public:
             // Solo lee de stdin para dejar de aceptar req
             // Al leer q cierra socket aceptador.
-void readRootFile(std::string fileName);
+    void readRootFile(std::string fileName);
 
-void run(const char *service, std::string fileName);
+    void run(const char *service, const std::string fileName);
 };
 
 #endif

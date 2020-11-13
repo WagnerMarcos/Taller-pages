@@ -7,7 +7,7 @@ void Client::send_petition(){
 
 void Client::read_petition(){
 	std::string line;
-	while(getline(std::cin, line)){
+	while (getline(std::cin, line)){
     	petition << line << std::endl;
 	}
  }
@@ -24,7 +24,7 @@ void Client::get_server_response(){
     bool socket_open = true;
     std::cout << "Espero respuesta, response: " << response.str() << std::endl;
 
-    while(socket_open){
+    while (socket_open){
         s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
         response << socket_buffer;
     }
@@ -33,15 +33,4 @@ void Client::get_server_response(){
 
 void Client::shutdown_writing(){
 	s.shutdown_writing();
-}
-void Client::receive_response(){
-	char socket_buffer[1024] ={0};
-    size_t buffer_size = 1024;
-    size_t bytes_received = 0;
-	// std::stringstream response;
-    bool socket_open = true;
-    while(socket_open){
-        s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
-        std::cout << socket_buffer;
-    }
 }

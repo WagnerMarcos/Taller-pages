@@ -9,7 +9,6 @@ class Client{
 public:
     void send_petition();
     void read_petition();
-    void receive_response();
     void shutdown_writing();
     void get_server_response();
     void connect(const char *host_name, const char *port);

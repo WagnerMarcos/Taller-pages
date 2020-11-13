@@ -16,7 +16,7 @@ public:
     Socket();
     ~Socket();
     Socket(Socket&& socket);
-    Socket(int fd);
+    explicit Socket(int fd);
     // int socket_init();
     void shutdown_read();
     void shutdown_writing();

@@ -12,16 +12,16 @@ Resource& Resource::operator=(const Resource& r){
 std::string Resource::get_body(){
     return body;
 }
-void Resource::set_method_name(std::string m){
+void Resource::set_method_name(const std::string m){
     method = m;
 }
-void Resource::set_resource_path(std::string pa){
+void Resource::set_resource_path(const std::string pa){
     path = pa;
 }
-void Resource::set_protocol(std::string p){
+void Resource::set_protocol(const std::string p){
     protocol = p;
 }
-void Resource::set_content_length(std::string v){
+void Resource::set_content_length(const std::string v){
     content_length = v;
 }
 void Resource::set_body(std::stringstream& b){
