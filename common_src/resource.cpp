@@ -27,9 +27,8 @@ void Resource::set_content_length(const std::string& v){
 void Resource::set_body(std::stringstream& b){
     std::string line;
     while (getline(b, line)){
-        if(line.length() > 0)
+        if (line.length() > 0)
             body += line + "\n";
-        // std::cout << "linea dentro de resource:" << line << std::endl;
     }
 }
 

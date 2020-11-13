@@ -48,15 +48,11 @@ void ThRequest::process_get_method(std::stringstream& petition,
                                 const std::string& resource_name,
                                 std::string& protocol){
     std::string body = resources.get_body(resource_name);
-    // if (body.length() == 0){
-    //     response << "HTTP/1.1 404 NOT FOUND\n\n";
-    //     return; 
-    // }
-
-    
+ 
     if (resource_name == "/"){
-        response << "​HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
+        response << "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
         response << body;
+        return;
     } else {
         response << "​HTTP/1.1 200 OK\n\n";
         response << body;
@@ -101,9 +97,10 @@ void ThRequest::parse_first_petition_line(std::stringstream& petition,
     std::cout << method;
     if (resource_name.length() > 0)
         std::cout << " " + resource_name;  
-    if (protocol.length() > 0)
+    if (protocol.length() > 0){
         std::cout << " " + protocol;
-    std::cout << std::endl;
+        std::cout << std::endl;
+    }
 }
 
 void ThRequest::parse_header(std::stringstream& petition, Resource& r){
