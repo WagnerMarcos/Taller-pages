@@ -9,13 +9,22 @@ ThRequest::~ThRequest(){
 }
 
 void ThRequest::run(){
-    std::stringstream response;
-    std::stringstream petition;
-    receive_petition(petition);
-    process_petition(petition, response);
-    send_response(response);
-    is_running = false;
-    s.shutdown_writing();
+    try {
+        std::stringstream response;
+        std::stringstream petition;
+        receive_petition(petition);
+        process_petition(petition, response);
+        send_response(response);
+        is_running = false;
+        s.shutdown_writing();
+
+    } catch (const std::exception &e){
+        std::cerr << e.what() << std::endl;
+        return;
+    } catch (...) { // ellipsis: catch anything
+        printf("Unknown error!");
+    }
+
 }
 
 bool ThRequest::is_dead(){
