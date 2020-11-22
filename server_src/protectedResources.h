@@ -3,7 +3,7 @@
 
 // #include "lock.h"
 #include <mutex>
-#include "resource.h"
+#include "../common_src/resource.h"
 #include <map>
 #include <string>
 class ProtectedResources{

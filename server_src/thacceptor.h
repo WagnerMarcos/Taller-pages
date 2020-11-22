@@ -2,8 +2,8 @@
 #define ThACCEPTOR__T
 
 #include "../common_src/socket.h"
-#include "../common_src/threquest.h"
-#include "../common_src/thread.h"
+#include "threquest.h"
+#include "thread.h"
 #include <map>
 #include <vector>
 #include <utility>

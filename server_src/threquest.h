@@ -1,8 +1,8 @@
 #ifndef THREQUEST__T
 #define THREQUEST__T
 #include <map>
-#include "resource.h"
-#include "socket.h"
+#include "../common_src/resource.h"
+#include "../common_src/socket.h"
 #include "thread.h"
 #include "protectedResources.h"
 #include <string>

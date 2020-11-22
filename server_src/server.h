@@ -9,10 +9,10 @@
 #include <atomic>
 #include "thacceptor.h"
 #include "../common_src/socket.h"
-#include "../common_src/thread.h"
-#include "../common_src/threquest.h"
+#include "thread.h"
+#include "threquest.h"
 #include "../common_src/resource.h"
-#include "../common_src/protectedResources.h"
+#include "protectedResources.h"
 class Server{
 private:
     ThAcceptor acceptor;
