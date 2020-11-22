@@ -1,7 +1,8 @@
 #ifndef PROTECTEDRESOURCES__T
 #define PROTECTEDRESOURCES__T
 
-#include "lock.h"
+// #include "lock.h"
+#include <mutex>
 #include "resource.h"
 #include <map>
 #include <string>
