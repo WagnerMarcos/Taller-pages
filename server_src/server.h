@@ -15,6 +15,7 @@
 #include "../common_src/protectedResources.h"
 class Server{
 private:
+    ThAcceptor acceptor;
     // Metodos conocidos por el servidor
     // std::string allowedMethods[2] = {"GET",
     //                                     "POST"};
@@ -24,11 +25,13 @@ private:
                 // Clave nombre de recurso. Valor es el 
                 // buffer con lo que se devuelve al cliente
 public:
+    Server(const char *service, const std::string& fileName);
+
             // Solo lee de stdin para dejar de aceptar req
             // Al leer q cierra socket aceptador.
     void readRootFile(std::string fileName);
 
-    void run(const char *service, const std::string& fileName);
+    void run();
 };
 
 #endif

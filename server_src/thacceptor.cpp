@@ -26,12 +26,19 @@ void ThAcceptor::bind_and_listen(const char *service){
 }
 
 void ThAcceptor::run(){
-    while (keep_accepting){
-        Socket clSocket(accept());
-        ThRequest *t = new ThRequest(resources, std::move(clSocket));
-        t -> start();
-        threads.push_back(t);
-        delete_finish_clients(threads);
+    try {
+        while (keep_accepting){
+            Socket clSocket(accept());
+            ThRequest *t = new ThRequest(resources, std::move(clSocket));
+            t -> start();
+            threads.push_back(t);
+            delete_finish_clients(threads);
+        }
+    } catch (const std::exception &e){
+        std::cerr << e.what() << std::endl;
+        return;
+    } catch (...) { // ellipsis: catch anything
+        printf("Unknown error!");
     }
 
     for (size_t i = 0; i < threads.size(); i++){

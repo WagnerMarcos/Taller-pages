@@ -1,5 +1,11 @@
 #include "client.h"
 
+Client::Client(const char *host_name, const char *port){
+    // std::cout << "hola ariel" << std::endl;
+    connect(host_name, port);
+    // std::cout << "hola ariel" << std::endl;
+}
+
 void Client::send_petition(){
 	s.send(petition.str().data(), petition.str().length());
 }
@@ -31,4 +37,11 @@ void Client::get_server_response(){
 
 void Client::shutdown_writing(){
 	s.shutdown_writing();
+}
+
+void Client::run(){
+    read_petition();
+    send_petition();
+    shutdown_writing();
+    get_server_response();
 }

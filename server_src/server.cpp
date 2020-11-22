@@ -1,5 +1,9 @@
 #include "server.h"
-
+Server::Server(const char *service, const std::string& fileName):
+    acceptor(service, resources)
+{
+    readRootFile(fileName);
+}
 void Server::readRootFile(std::string fileName){
     std::ifstream f;
     f.open(fileName);
@@ -11,11 +15,9 @@ void Server::readRootFile(std::string fileName){
     resources.post_resource(r);
 }
 
-void Server::run(const char *service, const std::string& fileName){
+void Server::run(){
     std::string input;
     bool keep_accepting = true;
-    ThAcceptor acceptor(service, resources);
-    readRootFile(fileName);
 
     acceptor.start();
     while (keep_accepting){
