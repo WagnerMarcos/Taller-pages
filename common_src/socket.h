@@ -11,6 +11,7 @@
 #include <cstring>
 #include <iostream>
 #include <errno.h>
+#include <utility>
 #include "acceptorClosed.h"
 #include "socketError.h"
 class Socket{
@@ -27,7 +28,7 @@ public:
     int connect(const char *host_name, const char *service);
     int send(const char *buffer, size_t buf_l);
     int receive(char *buffer, size_t buf_l, 
-            size_t *bytes_recv, bool *sckt_open);
+            size_t& bytes_recv, bool& sckt_open);
 private:
     explicit Socket(int fd);
     int fd;

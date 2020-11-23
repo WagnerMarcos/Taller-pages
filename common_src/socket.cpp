@@ -64,7 +64,7 @@ Socket Socket::accept(){
     int accepted_fd = 0;
     accepted_fd = ::accept(fd, NULL, NULL);
     if (accepted_fd == -1){
-        if(errno == 22)
+        if (errno == 22)
             throw AcceptorClosed("Se cerró el socket aceptador.");
         else
             throw SocketError();
@@ -119,19 +119,19 @@ int Socket::send(const char *buffer, size_t buf_l){
 }
  
 int Socket::receive(char *buffer, size_t buf_l, 
-                size_t *bytes_recv, bool *sckt_open){
-    *bytes_recv = 0;
+                size_t& bytes_recv, bool& sckt_open){
+    bytes_recv = 0;
 
-    while (*bytes_recv < buf_l && *sckt_open == true){
+    while (bytes_recv < buf_l && sckt_open == true){
         int r = 0;
-        r = ::recv(fd, &buffer[*bytes_recv], buf_l - *bytes_recv, 0);
+        r = ::recv(fd, &buffer[bytes_recv], buf_l - bytes_recv, 0);
         if (r < 0){
-            *sckt_open = false;
+            sckt_open = false;
             return ERROR;
         }else if (r == 0){
-            *sckt_open = false;
+            sckt_open = false;
         }else{
-            *bytes_recv += r;
+            bytes_recv += r;
         }
     }
     return 0;

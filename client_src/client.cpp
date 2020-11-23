@@ -29,7 +29,7 @@ void Client::get_server_response(){
     bool socket_open = true;
 	
     while (socket_open){
-        s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
+        s.receive(socket_buffer, buffer_size, bytes_received, socket_open);
         response << socket_buffer;
     }
 	std::cout << response.str();

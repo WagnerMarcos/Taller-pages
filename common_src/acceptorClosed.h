@@ -5,7 +5,7 @@
 #include <string>
 class AcceptorClosed : public std::exception {
 public:
-    AcceptorClosed(const std::string &error_msg){
+    explicit AcceptorClosed(const std::string &error_msg){
         _error_msg += error_msg;
     }
     virtual ~AcceptorClosed() noexcept {}
