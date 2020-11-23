@@ -11,7 +11,7 @@ class ThAcceptor : public Thread{
 public:
     ThAcceptor(const char *service, 
         ProtectedResources &resources);
-    int accept();
+    Socket accept();
     void stop_accepting();
     void process_requests();
     virtual void run() override;

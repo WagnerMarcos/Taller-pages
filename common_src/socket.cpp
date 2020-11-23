@@ -5,7 +5,7 @@ Socket::Socket(){
 }
 Socket::~Socket(){
     if (fd != -1)
-        close();
+        close(fd);
     fd = -1;
 }
 Socket::Socket(Socket&& socket): fd(socket.fd) {
@@ -18,10 +18,6 @@ void Socket::shutdown_read(){
 }
 void Socket::shutdown_writing(){
     shutdown(fd, SHUT_WR);
-}
-
-void Socket::close(){
-    ::close(fd);
 }
 
 int Socket::bind_and_listen(const char *service){
@@ -41,17 +37,20 @@ int Socket::bind_and_listen(const char *service){
         fd = ::socket(AF_INET, SOCK_STREAM, 0);
         int s = setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
         if (s == -1) {
-            close();
+            close(fd);
+            fd = -1;
             return 1;
         }
         if (bind(fd, rp->ai_addr, rp->ai_addrlen) == 0){
             break;               
         }
-        close();
+        close(fd);
+        fd = -1;
     }
     freeaddrinfo(results); // libero lista de direcciones
     if (listen(fd, 10) == -1){ 
-        close();
+        close(fd);
+        fd = -1;
         return ERROR;
     }
     return 0;
@@ -61,13 +60,16 @@ int Socket::bind_and_listen(const char *service){
 // Averiguar si sería mejor 
 // devolver fd
 // pasar por referencia un socket invalido
-int Socket::accept(){
+Socket Socket::accept(){
     int accepted_fd = 0;
     accepted_fd = ::accept(fd, NULL, NULL);
     if (accepted_fd == -1){
-        return -1;
+        if(errno == 22)
+            throw AcceptorClosed("Se cerró el socket aceptador.");
+        else
+            throw SocketError();
     }
-    return accepted_fd;
+    return std::move(Socket(accepted_fd));
 }
 
 int Socket::connect(const char *host_name, const char *service){
@@ -81,7 +83,8 @@ int Socket::connect(const char *host_name, const char *service){
     skt = getaddrinfo(host_name, service, &hints, &result);
 
     if (skt != 0) {
-        close();
+        close(fd);
+        fd = -1;
         return ERROR;
     }
     for (rp = result; rp != NULL; rp = rp->ai_next){
@@ -89,7 +92,8 @@ int Socket::connect(const char *host_name, const char *service){
         if (::connect(fd, rp->ai_addr, rp->ai_addrlen) == 0){      
             break; 
         }  
-        close();
+        close(fd);
+        fd = -1;
     }
     if (rp == NULL){              
         return ERROR;

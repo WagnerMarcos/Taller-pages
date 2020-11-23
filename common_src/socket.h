@@ -11,23 +11,25 @@
 #include <cstring>
 #include <iostream>
 #include <errno.h>
+#include "acceptorClosed.h"
+#include "socketError.h"
 class Socket{
 public:
     Socket();
     ~Socket();
     Socket(Socket&& socket);
-    explicit Socket(int fd);
     // int socket_init();
     void shutdown_read();
     void shutdown_writing();
-    void close();
+    // void close();
     int bind_and_listen(const char *service);
-    int accept();
+    Socket accept();
     int connect(const char *host_name, const char *service);
     int send(const char *buffer, size_t buf_l);
     int receive(char *buffer, size_t buf_l, 
             size_t *bytes_recv, bool *sckt_open);
 private:
+    explicit Socket(int fd);
     int fd;
 };
 

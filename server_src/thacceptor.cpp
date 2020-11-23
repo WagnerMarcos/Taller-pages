@@ -7,9 +7,8 @@ ThAcceptor::ThAcceptor(const char *service,
     bind_and_listen(service);
 }
 
-int ThAcceptor::accept(){
-    int fds = acceptor_socket.accept();
-    return fds;
+Socket ThAcceptor::accept(){
+    return std::move(acceptor_socket.accept());
 }
 void ThAcceptor::operator()(){
     this->run();
@@ -18,7 +17,6 @@ void ThAcceptor::stop_accepting(){
     keep_accepting = false;
     acceptor_socket.shutdown_read();
     acceptor_socket.shutdown_writing();
-    acceptor_socket.close();
 }
 
 void ThAcceptor::bind_and_listen(const char *service){
@@ -34,6 +32,7 @@ void ThAcceptor::run(){
             threads.push_back(t);
             delete_finish_clients(threads);
         }
+    } catch (const AcceptorClosed &e){ /* Finaliza ejecución de ThAcceptor */
     } catch (const std::exception &e){
         std::cerr << "Error encontrado en ThAcceptor.run()" << std::endl;
         std::cerr << e.what() << std::endl;
