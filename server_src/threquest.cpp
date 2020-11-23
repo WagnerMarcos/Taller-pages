@@ -2,7 +2,8 @@
 
 ThRequest::ThRequest(ProtectedResources& r, Socket socket):
     resources(r),
-    s(std::move(socket))
+    s(std::move(socket)),
+    is_running(true)
 {}
 
 ThRequest::~ThRequest(){
@@ -141,7 +142,7 @@ void ThRequest::receive_petition(std::stringstream& petition){
     size_t bytes_received = 0;
     bool socket_open = true;
     while (socket_open){
-        s.receive(socket_buffer, buffer_size, &bytes_received, &socket_open);
+        s.receive(socket_buffer, buffer_size, bytes_received, socket_open);
         petition << socket_buffer;
     }
 }

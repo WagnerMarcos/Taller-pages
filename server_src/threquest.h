@@ -9,11 +9,13 @@
 #include <sstream>
 #include <fstream>
 #include <utility>
+#include <atomic>
+
 class ThRequest : public Thread{
 private:
     ProtectedResources& resources;
     Socket s;
-    bool is_running = true;
+    std::atomic<bool> is_running;
     
 public:
     ThRequest(ProtectedResources& resources, Socket socket);

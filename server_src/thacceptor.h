@@ -7,6 +7,8 @@
 #include <map>
 #include <vector>
 #include <utility>
+#include <atomic>
+
 class ThAcceptor : public Thread{
 public:
     ThAcceptor(const char *service, 
@@ -19,7 +21,7 @@ public:
 
 private:
     Socket acceptor_socket;
-    bool keep_accepting = true;
+    std::atomic<bool> keep_accepting;
     std::vector<ThRequest*> threads;
     ProtectedResources& resources;      
     void delete_finish_clients(std::vector<ThRequest*> &threads);

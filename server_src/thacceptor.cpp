@@ -2,6 +2,7 @@
 
 ThAcceptor::ThAcceptor(const char *service,
             ProtectedResources &resources):
+    keep_accepting(true),
     resources(resources)
 {
     bind_and_listen(service);
