@@ -6,6 +6,7 @@
 #include "../common_src/resource.h"
 #include <map>
 #include <string>
+#include <utility>
 class ProtectedResources{
 private:
     std::map<std::string, Resource> resources;      
@@ -15,7 +16,8 @@ public:
     ProtectedResources(){}
     ~ProtectedResources(){}
     void post_resource(Resource& r);
-    std::string get_body(std::string resource_name);
+    // std::string get_body(std::string resource_name);
+    std::string get_body(const std::string &resource_name);
 };
 
 #endif

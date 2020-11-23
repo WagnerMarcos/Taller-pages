@@ -35,6 +35,7 @@ void ThAcceptor::run(){
             delete_finish_clients(threads);
         }
     } catch (const std::exception &e){
+        std::cerr << "Error encontrado en ThAcceptor.run()" << std::endl;
         std::cerr << e.what() << std::endl;
         return;
     } catch (...) { // ellipsis: catch anything

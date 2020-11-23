@@ -17,14 +17,13 @@ void ThRequest::run(){
         send_response(response);
         is_running = false;
         s.shutdown_writing();
-
     } catch (const std::exception &e){
+        std::cerr << "Excepcion en ThRequest.run()" << std::endl;
         std::cerr << e.what() << std::endl;
         return;
     } catch (...) { // ellipsis: catch anything
         printf("Unknown error!");
     }
-
 }
 
 bool ThRequest::is_dead(){
@@ -56,7 +55,7 @@ void ThRequest::process_get_method(std::stringstream& petition,
                                 std::string& method,
                                 const std::string& resource_name,
                                 std::string& protocol){
-    std::string body = resources.get_body(resource_name);
+    const std::string& body = resources.get_body(resource_name);
  
     if (resource_name == "/"){
         response << "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";

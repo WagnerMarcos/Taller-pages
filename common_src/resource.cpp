@@ -9,7 +9,7 @@ Resource& Resource::operator=(const Resource& r){
     return *this;
 }
 
-std::string Resource::get_body(){
+const std::string& Resource::get_body(){
     return body;
 }
 void Resource::set_method_name(const std::string& m){

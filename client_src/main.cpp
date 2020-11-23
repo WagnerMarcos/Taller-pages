@@ -1,7 +1,6 @@
 #include "client.h"
 
 int main(int argc, char* argv[]){
-
     try {
         Client client(argv[1], argv[2]);
         client.run();

@@ -18,7 +18,7 @@ public:
 
     void set_content_length(const std::string& value);
     void set_body(std::stringstream& buf);
-	std::string get_body();
+	const std::string& get_body();
     void print();
     Resource& operator=(const Resource& r);
 private:
