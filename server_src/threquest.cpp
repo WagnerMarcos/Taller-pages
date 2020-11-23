@@ -9,6 +9,10 @@ ThRequest::ThRequest(ProtectedResources& r, Socket socket):
 ThRequest::~ThRequest(){
 }
 
+void ThRequest::operator()(){
+    this->start();
+}
+
 void ThRequest::run(){
     try {
         std::stringstream response;

@@ -19,7 +19,8 @@ void Server::run(){
     std::string input;
     bool keep_accepting = true;
 
-    acceptor.start();
+    acceptor();
+    
     while (keep_accepting){
         std::cin >> input;
         if (input == "q"){

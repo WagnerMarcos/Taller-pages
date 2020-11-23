@@ -12,7 +12,7 @@ Socket ThAcceptor::accept(){
     return std::move(acceptor_socket.accept());
 }
 void ThAcceptor::operator()(){
-    this->run();
+    this->start();
 }
 void ThAcceptor::stop_accepting(){
     keep_accepting = false;
@@ -29,7 +29,7 @@ void ThAcceptor::run(){
         while (keep_accepting){
             Socket clSocket(accept());
             ThRequest *t = new ThRequest(resources, std::move(clSocket));
-            t -> start();
+            (*t)();
             threads.push_back(t);
             delete_finish_clients(threads);
         }
