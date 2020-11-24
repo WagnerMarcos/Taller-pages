@@ -10,7 +10,6 @@ class ProtectedResources{
 private:
     std::map<std::string, Resource> resources;      
     std::mutex m;    
-
 public:
     ProtectedResources(){}
     ~ProtectedResources(){}
