@@ -6,9 +6,10 @@
 #include <errno.h>
 class SocketError : public std::exception {
 public:
-    SocketError(){
+    SocketError(std::string msg){
         _errno = errno;
-        error_msg = std::string(strerror(_errno));
+        error_msg = msg + "\nstrerror(errno): ";
+        error_msg += std::string(strerror(_errno));
     }
 
     virtual ~SocketError() noexcept {}

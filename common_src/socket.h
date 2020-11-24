@@ -19,10 +19,8 @@ public:
     Socket();
     ~Socket();
     Socket(Socket&& socket);
-    // int socket_init();
     void shutdown_read();
     void shutdown_writing();
-    // void close();
     int bind_and_listen(const char *service);
     Socket accept();
     int connect(const char *host_name, const char *service);

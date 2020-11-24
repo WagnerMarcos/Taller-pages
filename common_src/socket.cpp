@@ -67,7 +67,7 @@ Socket Socket::accept(){
         if (errno == 22)
             throw AcceptorClosed("Se cerró el socket aceptador.");
         else
-            throw SocketError();
+            throw SocketError("Error en socket.accept().");
     }
     return std::move(Socket(accepted_fd));
 }
@@ -126,10 +126,9 @@ int Socket::receive(char *buffer, size_t buf_l,
         int r = 0;
         r = ::recv(fd, &buffer[bytes_recv], buf_l - bytes_recv, 0);
         if (r < 0){
-            sckt_open = false;
-            return ERROR;
+            throw SocketError("Error en socket.receive()");
         }else if (r == 0){
-            sckt_open = false;
+             false;
         }else{
             bytes_recv += r;
         }

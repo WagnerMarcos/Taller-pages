@@ -1,7 +1,7 @@
 #include "resource.h"
 
 Resource& Resource::operator=(const Resource& r){
-    if(this == &r)
+    if (this == &r)
         return *this;
     method = r.method.data();
     path = r.path.data();
