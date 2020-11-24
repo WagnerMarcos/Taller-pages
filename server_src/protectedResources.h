@@ -1,7 +1,6 @@
 #ifndef PROTECTEDRESOURCES__T
 #define PROTECTEDRESOURCES__T
 
-// #include "lock.h"
 #include <mutex>
 #include "../common_src/resource.h"
 #include <map>
@@ -16,8 +15,7 @@ public:
     ProtectedResources(){}
     ~ProtectedResources(){}
     void post_resource(Resource& r);
-    // std::string get_body(std::string resource_name);
-    std::string get_body(const std::string &resource_name);
+    void get_body(const std::string &resource_name, std::string& body);
 };
 
 #endif

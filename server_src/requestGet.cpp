@@ -16,7 +16,8 @@ RequestGet::RequestGet(ProtectedResources& resources,
 RequestGet::~RequestGet(){}
 
 void RequestGet::process(std::stringstream& petition){
-    const std::string& body = resources.get_body(resource_name);
+    std::string body;
+    resources.get_body(resource_name, body);
  
     if (resource_name == "/"){
         response << "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
