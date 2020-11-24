@@ -28,9 +28,9 @@ void ThAcceptor::run(){
     try {
         while (keep_accepting){
             Socket clSocket(accept());
-            ThRequest *t = new ThRequest(resources, std::move(clSocket));
-            (*t)();
-            threads.push_back(t);
+            ThRequest *request = new ThRequest(resources, std::move(clSocket));
+            (*request)();
+            threads.push_back(request);
             delete_finish_clients(threads);
         }
     } catch (const AcceptorClosed &e){ /* Finaliza ejecución de ThAcceptor */
