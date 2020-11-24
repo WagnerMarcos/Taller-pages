@@ -21,6 +21,8 @@ Hay tres tipos de procesos corriendo en simultáneo durante la ejecución del pr
 Para tratar con el problema de la race condition en el registro de petitorios se implimentó una clase Lock dentro del registro de petitorios, y este registro funcionará de monitor bloqueando el acceso a sus métodos mientras haya un hilo accediendo.
 La clase cliente recibe por entrada estándar el petitorio y la envía al servidor a través de sockets, para luego esperar e imprimir su respuesta.
 
+Se realizó para la segunda entrega la implementación de polimorfismo al tratar los requests, delegando la tarea de parseo, registro/recuperación y generación de respuesta apropiada a cada clase de request.
+
 ### Diagrama de secuencias para creación de ThAcceptor y de ThClient
 
 ![Diagrama de secuencia](https://github.com/WagnerMarcos/Taller-pages/blob/master/tp3.png?raw=true)
