@@ -1,9 +1,7 @@
 #include "client.h"
 
 Client::Client(const char *host_name, const char *port){
-    // std::cout << "hola ariel" << std::endl;
     connect(host_name, port);
-    // std::cout << "hola ariel" << std::endl;
 }
 
 void Client::send_petition(){
