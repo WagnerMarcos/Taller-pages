@@ -56,10 +56,6 @@ int Socket::bind_and_listen(const char *service){
     return 0;
 }
 
-
-// Averiguar si sería mejor 
-// devolver fd
-// pasar por referencia un socket invalido
 Socket Socket::accept(){
     int accepted_fd = 0;
     accepted_fd = ::accept(fd, NULL, NULL);

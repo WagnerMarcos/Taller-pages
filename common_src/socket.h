@@ -1,9 +1,7 @@
 #ifndef SOCKET__T
 #define SOCKET__T
 
-
 #define ERROR 1
-
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netdb.h>

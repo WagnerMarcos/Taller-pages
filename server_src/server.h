@@ -16,9 +16,6 @@
 class Server{
 private:
     ThAcceptor acceptor;
-    // Metodos conocidos por el servidor
-    // std::string allowedMethods[2] = {"GET",
-    //                                     "POST"};
     ProtectedResources resources;
                 // Guardo los recursos agregados con POST
                 // Comienza con el archivo guardado con /

@@ -23,11 +23,6 @@ public:
     ~ThRequest();
     void operator()();
     virtual void run() override;
-
-            // Recibe una peticion por un recurso
-            // busca en el recursos map
-            // Si no lo encuentra tiene que devolver algun error
-
     bool is_dead();
     void process_petition(std::stringstream& buf, std::stringstream& response);
     void receive_petition(std::stringstream& petition);

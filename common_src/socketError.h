@@ -10,7 +10,6 @@ public:
         _errno(errno),
         error_msg(msg)
     {
-        // _errno = errno;
         error_msg += "\nstrerror(errno): ";
         error_msg += std::string(strerror(_errno));
     }
